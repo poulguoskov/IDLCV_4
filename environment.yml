@@ -1,0 +1,21 @@
+name: IDLCV
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - numpy
+  - opencv
+  - matplotlib
+  - pandas
+  - scipy
+  - seaborn
+  - tqdm
+  - pip
+  - pip:
+    - selectivesearch
+    - scikit-image
+    - torchsummary

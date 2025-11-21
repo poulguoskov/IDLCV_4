@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Results and data
+*.pkl
+*.npy
+
+# Virtual environment
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
