@@ -16,7 +16,9 @@ Dataset: `/dtu/datasets1/02516/potholes/`
 ## Part 1: Object Proposals
 
 ### Task 1: Data Familiarization
-TODO
+Loaded the dataset and visualized samples with ground truth bounding boxes. Split into 498 train, 99 val, 68 test.
+
+![Sample Pothole Images](results/part_1/figures/samples.png)
 
 ### Task 2: Proposal Extraction
 TODO
