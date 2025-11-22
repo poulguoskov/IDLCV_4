@@ -21,7 +21,14 @@ Loaded the dataset and visualized samples with ground truth bounding boxes. Spli
 ![Sample Pothole Images](results/part_1/figures/samples.png)
 
 ### Task 2: Proposal Extraction
-TODO
+Used selective search with scale=500, sigma=0.9, min_size=20. Extracted proposals for all splits (~300 proposals per image on avg).
+
+Results saved as pickle files (Python's serialization format for saving objects):
+- `results/part_1/train_proposals.pkl` - 498 images
+- `results/part_1/val_proposals.pkl` - 99 images  
+- `results/part_1/test_proposals.pkl` - 68 images
+
+Each pickle file contains a dict mapping filename → proposals + image dimensions.
 
 ### Task 3: Evaluation
 TODO
