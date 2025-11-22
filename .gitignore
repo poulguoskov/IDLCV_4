@@ -10,7 +10,6 @@ __pycache__/
 *.ipynb_checkpoints
 
 # Results and data
-*.pkl
 *.npy
 
 # Virtual environment
