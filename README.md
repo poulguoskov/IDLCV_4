@@ -18,7 +18,7 @@ Dataset: `/dtu/datasets1/02516/potholes/`
 ### Task 1: Data Familiarization
 Loaded the dataset and visualized samples with ground truth bounding boxes. Split into 498 train, 99 val, 68 test.
 
-<img src="results/part_1/figures/samples.png" alt="Sample Pothole Images" width="500">
+<img src="results/part_1/figures/samples.png" alt="Sample Pothole Images" width="750">
 
 ### Task 2: Proposal Extraction
 Used selective search with scale=500, sigma=0.9, min_size=20. Extracted proposals for all splits (~300 proposals per image on avg).
@@ -38,7 +38,7 @@ Evaluated proposals using recall and MABO metrics on train set.
 - Mean MABO: **54.5%**
 - Proposals per image: ~306
 
-<img src="results/part_1/figures/proposals_example_10.png" alt="Proposal visualization" width="500">
+<img src="results/part_1/figures/proposals_example_10.png" alt="Proposal visualization" width="750">
 
 *Green: proposals, Red: ground truth boxes*
 
@@ -60,12 +60,23 @@ Smaller scale and larger min_size improves recall&mabo. Decided to run a systema
 - Best config: **scale=50, sigma=0.9, min_size=50**
 - Results: **81.0% recall**, **63.5% MABO**, ~883 proposals/image
 
-<img src="results/part_1/figures/optimization_plots.png" alt="Optimization results" width="500">
+<img src="results/part_1/figures/optimization_plots.png" alt="Optimization results" width="750">
 
-**Big improvement over baseline!** Re-extracted all splits with optimized parameters. Will use `optimized_*_proposals.pkl` for Part 2.
+Big improvement over baseline, re-extracted all splits with optimized parameters. Will use `optimized_*_proposals.pkl` for labeling.
 
 ### Task 4: Labeling
-TODO
+Labeled all proposals as positive (IoU ≥ 0.5) or negative (IoU < 0.5) for CNN training.
+
+Results:
+- Train: 5,930 positive (1.3%), 435,549 negative → ratio 1:73
+- Val: 1,332 positive (1.5%), 90,044 negative → ratio 1:68
+- Test: 772 positive (1.3%), 60,146 negative → ratio 1:78
+
+Severe class imbalance, we probably wont be using all the negative data in part 2.
+
+<img src="results/part_1/figures/labeled_examples.png" alt="Labeled proposals" width="750">
+
+*Green=ground truth, Blue=positive proposals, Red=negative proposals*
 
 ---
 
