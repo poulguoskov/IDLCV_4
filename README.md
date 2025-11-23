@@ -31,15 +31,29 @@ Results saved as pickle files (Python's serialization format for saving objects)
 Each pickle file contains a dict mapping filename → proposals + image dimensions.
 
 ### Task 3: Evaluation
-Evaluated proposals using recall and MABO metrics. With current parameters (scale=500, etc.), we get:
+Evaluated proposals using recall and MABO metrics on train set.
+
+**Baseline results (scale=500, sigma=0.9, min_size=20)**
 - Mean recall @IoU=0.5: **60.1%**
 - Mean MABO: **54.5%**
-
-About 60% of potholes are captured with ~306 proposals per image.
+- Proposals per image: ~306
 
 ![Proposal visualization](results/part_1/figures/proposals_example_10.png)
 
 *Green: proposals, Red: ground truth boxes*
+
+---
+
+**Optional: Parameter optimization**
+
+Baseline recall&mabo seemed low, so tested if different parameters could improve it.
+
+*Manual testing (`try_params.py`):*
+- scale=500, min_size=20: 59.8% recall, 302 proposals
+- scale=300, min_size=30: 64.3% recall, 312 proposals  
+- scale=100, min_size=40: **79.2% recall**, 614 proposals
+
+Smaller scale and larger min_size improves recall&mabo. Let run a systematic grid search.
 
 ### Task 4: Labeling
 TODO
