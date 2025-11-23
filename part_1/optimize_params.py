@@ -103,8 +103,8 @@ def plot_results(results):
     plt.colorbar(scatter2, ax=axes[2], label='Scale')
     
     plt.tight_layout()
-    plt.savefig('results/part_1/optimization_plots.png', dpi=150)
-    print("\nSaved plots to results/part_1/optimization_plots.png")
+    plt.savefig('results/part_1/figures/optimization_plots.png', dpi=150)
+    print("\nSaved plots to results/part_1/figures/optimization_plots.png")
 
 def find_best_config(results):
     """Find best configuration. We optimize for recall since we need to capture all potholes."""
@@ -162,9 +162,7 @@ if __name__ == '__main__':
     
     # find best
     best = find_best_config(results)
-    print(f"\n{'='*60}")
-    print("Best configuration (optimized for recall):")
-    print(f"{'='*60}")
+    print("\nBest configuration (optimized for recall):\n")
     print(f"  scale = {best['scale']}")
     print(f"  sigma = {sigma}")
     print(f"  min_size = {best['min_size']}")
