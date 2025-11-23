@@ -31,7 +31,15 @@ Results saved as pickle files (Python's serialization format for saving objects)
 Each pickle file contains a dict mapping filename → proposals + image dimensions.
 
 ### Task 3: Evaluation
-TODO
+Evaluated proposals using recall and MABO metrics. With current parameters (scale=500, etc.), we get:
+- Mean recall @IoU=0.5: **60.1%**
+- Mean MABO: **54.5%**
+
+About 60% of potholes are captured with ~306 proposals per image.
+
+![Proposal visualization](results/part_1/figures/proposals_example_10.png)
+
+*Green: proposals, Red: ground truth boxes*
 
 ### Task 4: Labeling
 TODO
