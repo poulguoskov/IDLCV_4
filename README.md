@@ -18,7 +18,7 @@ Dataset: `/dtu/datasets1/02516/potholes/`
 ### Task 1: Data Familiarization
 Loaded the dataset and visualized samples with ground truth bounding boxes. Split into 498 train, 99 val, 68 test.
 
-![Sample Pothole Images](results/part_1/figures/samples.png)
+<img src="results/part_1/figures/samples.png" alt="Sample Pothole Images" width="500">
 
 ### Task 2: Proposal Extraction
 Used selective search with scale=500, sigma=0.9, min_size=20. Extracted proposals for all splits (~300 proposals per image on avg).
@@ -38,7 +38,7 @@ Evaluated proposals using recall and MABO metrics on train set.
 - Mean MABO: **54.5%**
 - Proposals per image: ~306
 
-![Proposal visualization](results/part_1/figures/proposals_example_10.png)
+<img src="results/part_1/figures/proposals_example_10.png" alt="Proposal visualization" width="500">
 
 *Green: proposals, Red: ground truth boxes*
 
@@ -49,11 +49,20 @@ Evaluated proposals using recall and MABO metrics on train set.
 Baseline recall&mabo seemed low, so tested if different parameters could improve it.
 
 *Manual testing (`try_params.py`):*
-- scale=500, min_size=20: 59.8% recall, 302 proposals
-- scale=300, min_size=30: 64.3% recall, 312 proposals  
-- scale=100, min_size=40: **79.2% recall**, 614 proposals
+- scale=500, min_size=20: 59.8% recall, 54.4% MABO, 302 proposals
+- scale=300, min_size=30: 64.3% recall, 57.7% MABO, 312 proposals  
+- scale=100, min_size=40: **79.2% recall**, 63.5% MABO, 614 proposals
 
-Smaller scale and larger min_size improves recall&mabo. Let run a systematic grid search.
+Smaller scale and larger min_size improves recall&mabo. Decided to run a systematic grid search.
+
+*Systematic optimization (`optimize_params.py`):*
+- Grid search: 35 combinations (scale: 50-500, min_size: 10-50, sigma fixed at 0.9)
+- Best config: **scale=50, sigma=0.9, min_size=50**
+- Results: **81.0% recall**, **63.5% MABO**, ~883 proposals/image
+
+<img src="results/part_1/figures/optimization_plots.png" alt="Optimization results" width="500">
+
+**Big improvement over baseline!** Re-extracted all splits with optimized parameters. Will use `optimized_*_proposals.pkl` for Part 2.
 
 ### Task 4: Labeling
 TODO
