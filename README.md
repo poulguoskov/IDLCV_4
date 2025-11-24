@@ -83,13 +83,36 @@ Severe class imbalance, we probably wont be using all the negative data in part 
 ## Part 2: CNN Classifier
 
 ### Task 1: Build CNN
-TODO
+Simple 4-layer CNN for binary classification (pothole vs background)
+
+Architecture: Conv(32) → Conv(64) → Conv(128) → Conv(256) → FC(128) → FC(2)
+- Input: 64×64 crops (avg proposals are small, can try larger in future when finetuning)
+- 421,570 parameters
+- Dropout 0.5 to reduce overfitting
 
 ### Task 2: Dataloader with Balanced Sampling
-TODO
+Build dataset that loads proposals from part 1 and crops them from images.
+
+Train data: 441,479 proposals (5,930 pos, 435,549 neg)
+Val data: 91,376 proposals (1,332 pos, 90,044 neg)
+
+Class imbalance handling:
+- Following lecture suggestion: 25% positives, 75 % negative per batch
+- Training: use all 5930 positives, sample 3x negatives (different each epoch, acts like regularization)
+- Validation: fixed subset (all 1332 positives + 3996 negatives) for comparable metrics
 
 ### Task 3: Training
-TODO
+Hyperparameters:
+- Batch size: 64 (16 pos + 48 neg per batch)
+- Optimizer: Adam, lr=0.001
+- Epoch: 20
+
+Results:
+- Best val accuracy: **90.05%** at epoch 10
+- Final train accuracy: **95.14%** (epoch 20)
+- Model saved: `results/part_2/best_model.pth`
+
+Model starts overfitting after epoch 10 - training accuracy keeps improving (75% → 95%) while validation peaks at 90% then degrades. Fixed validation subset makes this pattern clear. Could probably train for fewer epochs (10-12) or add more regularization.
 
 ### Task 4: Evaluation
 TODO
