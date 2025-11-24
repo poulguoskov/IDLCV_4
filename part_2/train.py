@@ -77,31 +77,28 @@ def main():
     print("\nLoading validation data...")
     val_dataset = ProposalDataset(val_proposals, images_dir, input_size=64)
 
-    # create balanced samplers
+    # create balanced sampler for training
     train_sampler = BalancedBatchSampler(
         train_dataset.pos_idx,
         train_dataset.neg_idx,
         batch_size=batch_size
     )
 
-    val_sampler = BalancedBatchSampler(
-        val_dataset.pos_idx,
-        val_dataset.neg_idx,
-        batch_size=batch_size
-    )
-
-    # dataloaders
     train_loader = DataLoader(
         train_dataset,
         batch_sampler=train_sampler,
         num_workers=4
     )
 
-    val_loader = DataLoader(
-        val_dataset,
-        batch_sampler=val_sampler,
-        num_workers=4
-    )
+    # fixed balanced validation subset (stays same every epoch)
+    val_pos_subset = val_dataset.pos_idx # all positives
+    val_neg_subset = val_dataset.neg_idx[:len(val_dataset.pos_idx)*3] # 3x negatives
+    val_subset_idx = val_pos_subset + val_neg_subset
+
+    val_subset = torch.utils.data.Subset(val_dataset, val_subset_idx)
+    val_loader = DataLoader(val_subset, batch_size=64, shuffle=True, num_workers=4)
+
+    print(f"Validation subset: {len(val_pos_subset)} pos + {len(val_neg_subset)} neg = {len(val_subset_idx)} total")
 
     # model, loss, optimizer
     model = SimpleCNN(num_classes=2).to(device)
