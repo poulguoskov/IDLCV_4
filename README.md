@@ -115,7 +115,26 @@ Results:
 Model starts overfitting after epoch 10 - training accuracy keeps improving (75% → 95%) while validation peaks at 90% then degrades. Fixed validation subset makes this pattern clear. Could probably train for fewer epochs (10-12) or add more regularization.
 
 ### Task 4: Evaluation
-TODO
+Loaded best model and evaluated on full test set (60,918 proposals: 772 positive, 60,146 negative).
+
+Results:
+
+- Overall accuracy: 94.71% (Misleading due to class imbalance)
+- Per-class metrics:
+    - Background (class 0):
+        - Precision: 99.56%, Recall: 95.06%, F1: 97.26%
+    Pothole (class 1):
+        - Precision: 14.91%, Recall: 67.49%, F1: 24.42%
+
+Confusion Matrix:
+```
+              Predicted
+           Bg      Pothole
+Actual Bg  57172   2974
+       Pot 251     521
+```
+
+Model catches 67% of potholes (decent recall) but has many false positives (low precision). This is expected, and will be solved by Non-Maximum Suppression (NMS) in part 3 of the project, by removing overlapping detections.
 
 ---
 
