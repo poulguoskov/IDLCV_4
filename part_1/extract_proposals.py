@@ -10,7 +10,7 @@ import pickle
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import selectivesearch
-from data.data_loader import PotholesDataset
+from data_loader import PotholesDataset
 
 def extract_proposals(image, scale=500, sigma=0.9, min_size=20):
     """Run selective search on an image"""
