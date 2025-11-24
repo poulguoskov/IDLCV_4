@@ -53,7 +53,7 @@ class SimpleCNN(nn.Module):
 if __name__ == '__main__':
     # quick test
     model = SimpleCNN()
-    x = torch.randn(4, 3, 128, 128)
+    x = torch.randn(4, 3, 64, 64)
     out = model(x)
     print(f"Input: {x.shape}")
     print(f"Output: {out.shape}")
