@@ -153,7 +153,20 @@ Results:
 Many detections per image due to overlapping proposals and low precision from part 2, NMS should reduce this significantly.
 
 ### Task 2: NMS
-TODO
+Applied NMS with IoU threshold= 0.5 to remove overlapping detections
+
+Algorithm:
+1. Sort detections by confidence score (highest first)
+2. Keep highest scoring box
+3. Remove all boxes with IoU > 0.5 with kept box
+4. Repeat until no boxes remain
+
+Results:
+- Before NMS: 3,495 detections (51.4 per image)
+- After NMS: 168 detections (2.5 per image)
+- Removed: 3,327 detections (95.2%)
+
+NMS successfully reduced redundant overlapping boxes.
 
 ### Task 3: Average Precision
 TODO
