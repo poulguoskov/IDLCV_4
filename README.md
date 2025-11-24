@@ -138,10 +138,19 @@ Model catches 67% of potholes (decent recall) but has many false positives (low 
 
 ---
 
-## Part 3: Testing & Evaluation
+## Part 3: Object Detection Pipeline
 
 ### Task 1: Apply CNN to Test Images
-TODO
+Ran full detection pipeline on 68 test image:
+1. Extract proposals using selective search
+2. Classify each proposals with trained CNN
+3. Keep detections where CNN predicts pothole (class 1, threshold=0.5)
+
+Results:
+- Total detections: 3,495
+- Average per image: 51.4 detections
+
+Many detections per image due to overlapping proposals and low precision from part 2, NMS should reduce this significantly.
 
 ### Task 2: NMS
 TODO
