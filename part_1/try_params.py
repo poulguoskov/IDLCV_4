@@ -5,7 +5,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from data.data_loader import PotholesDataset
+from data_loader import PotholesDataset
 from part_1.extract_proposals import extract_proposals
 from part_1.eval_proposals import compute_iou, compute_recall, compute_mabo
 import numpy as np

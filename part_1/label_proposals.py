@@ -14,7 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from tqdm import tqdm
-from data.data_loader import PotholesDataset
+from data_loader import PotholesDataset
 from part_1.eval_proposals import compute_iou
 
 def label_proposals(proposals_dict, dataset, iou_thresh=0.5):

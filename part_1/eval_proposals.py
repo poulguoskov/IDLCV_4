@@ -10,7 +10,7 @@ import pickle
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from tqdm import tqdm
-from data.data_loader import PotholesDataset
+from data_loader import PotholesDataset
 
 def compute_iou(proposal, gt_box):
     """Compute IoU between proposal and gt_box dict."""
