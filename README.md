@@ -169,4 +169,19 @@ Results:
 NMS successfully reduced redundant overlapping boxes.
 
 ### Task 3: Average Precision
-TODO
+Evaluated detection performance using average percision metric.
+
+Process:
+1. Match predictions to ground truth (IoU ≥ 0.5)
+2. Sort detections by confidence
+3. Calculate precision-recall curve
+4. Compute AP using 11-point interpolation
+
+Results:
+- Average Precision @ IoU=0.5: **10.80%**
+- Total detections: 168
+- Total ground truth: 162 potholes
+
+<img src="results/part_3/pr_curve.png" alt="Precision-Recall Curve" width="750">
+
+The full detection pipeline works, but performance could potentially be improved with pretrained models, better training strategy, larger input size or better proposal quality.
