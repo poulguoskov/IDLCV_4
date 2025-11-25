@@ -185,3 +185,37 @@ Results:
 <img src="results/part_3/pr_curve.png" alt="Precision-Recall Curve" width="750">
 
 The full detection pipeline works, but performance could potentially be improved with pretrained models, better training strategy, larger input size or better proposal quality.
+
+## Part 4: Faster R-CNN (Optional)
+
+### Motivation
+Parts 1-3 used a modular pipeline: selective search generates proposals independently, then a CNN classifies each crop. The proposal step has no knowledge of what we're looking for, and the CNN never sees the full image context.
+
+Faster R-CNN instead learns everything end-to-end. A Region Proposal Network (RPN) generates proposals directly from learned features, and shares a backbone with the classifier. This means proposals are optimized specifically for finding potholes, and both stages benefit from the pretrained ResNet-50 + FPN features.
+
+### Setup
+- Pretrained Faster R-CNN with ResNet-50 FPN backbone (torchvision)
+- Modified head for 2 classes (background + pothole)
+- Data augmentation: horizontal flip, color jitter, random scale
+- Training: SGD (lr=0.005), 15 epochs, batch size 4
+
+### Results
+
+| Method | AP@0.5 |
+|--------|--------|
+| Part 3 (SS + CNN) | 10.80% |
+| Faster R-CNN | **71.74%** |
+
+The 6.6x improvement comes from the pretrained backbone, learned proposals, and joint optimization.
+
+<img src="results/part_4/figures/detection_grid.png" alt="Detections" width="750">
+
+*Green = ground truth, Blue = predictions*
+
+### Running
+```bash
+cd part_4
+python train.py
+python evaluate.py
+python visualize.py
+```
