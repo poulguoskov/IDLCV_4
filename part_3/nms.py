@@ -1,29 +1,6 @@
 import pickle
 import numpy as np
-
-def compute_iou(box1, box2):
-    """Compute IoU between two boxes [x, y, w, h]"""
-    x1, y1, w1, h1 = box1
-    x2, y2, w2, h2 = box2
-
-    # convert to [x1, y1, x2, y2]
-    box1_x2, box1_y2 = x1 + w1, y1 + h1
-    box2_x2, box2_y2 = x2 + w2, y2 + h2
-
-    # intersection
-    xi1 = max(x1, x2)
-    yi1 = max(y1, y2)
-    xi2 = max(box1_x2, box2_x2)
-    yi2 = max(box1_y2, box2_y2)
-
-    inter_area = max(0, xi2 - xi1) * max(0, yi2 - yi1)
-
-    # union
-    box1_area = w1 * h1
-    box2_area = w2 * h2
-    union_area = box1_area + box2_area - inter_area
-
-    return inter_area / union_area if union_area > 0 else 0
+from utils import compute_iou
 
 def nms(detections, iou_threshold=0.5):
     """Apply non-maximum suppression to detections"""

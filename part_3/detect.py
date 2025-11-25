@@ -12,23 +12,7 @@ sys.path.append('part_2')
 
 from extract_proposals import extract_proposals
 from model import SimpleCNN
-
-def get_test_files(data_path='/dtu/datasets1/02516/potholes/', seed=42):
-    """Get test files using same split as Part 1"""
-    annotations_dir = Path(data_path) / 'annotations'
-    
-    # get all files and shuffle (same as data_loader.py)
-    all_files = sorted([f.stem for f in annotations_dir.glob('*.xml')])
-    random.seed(seed)
-    random.shuffle(all_files)
-    
-    # 75/15/15 split (same as data_loader.py)
-    n = len(all_files)
-    n_train = int(0.75 * n)
-    n_val = int(0.15 * n)
-    
-    test_files = all_files[n_train + n_val:]
-    return test_files
+from utils import get_test_files
 
 def detect_potholes(image_path, model, device, transform, threshold=0.5):
     """Run full detection pipeline on a single image"""
